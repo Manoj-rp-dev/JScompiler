@@ -1,0 +1,277 @@
+:root {
+  --bg-color: #f3f4f6;
+  --surface-color: #ffffff;
+  --surface-border: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+  --danger-color: #ef4444;
+  --success-color: #10b981;
+  --code-bg: #f8fafc;
+  --code-text: #334155;
+  --pane-header-bg: #f9fafb;
+  --console-bg: #1e1e1e;
+  --console-text: #d4d4d4;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --resizer-color: #cbd5e1;
+}
+
+body.dark-theme {
+  --bg-color: #0f172a;
+  --surface-color: #1e293b;
+  --surface-border: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-color: #3b82f6;
+  --accent-hover: #60a5fa;
+  --danger-color: #f87171;
+  --success-color: #34d399;
+  --code-bg: #0f172a;
+  --code-text: #e2e8f0;
+  --pane-header-bg: #1e293b;
+  --console-bg: #0f172a;
+  --console-text: #e2e8f0;
+  --resizer-color: #475569;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.primary-btn {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.primary-btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.4);
+}
+
+.secondary-btn {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--surface-border);
+}
+
+.secondary-btn:hover {
+  background-color: rgba(107, 114, 128, 0.1);
+}
+
+.icon-btn {
+  padding: 0.5rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--surface-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background-color: rgba(107, 114, 128, 0.1);
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.pane {
+  background-color: var(--surface-color);
+  border-radius: 0.75rem;
+  border: 1px solid var(--surface-border);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.editor-pane {
+  flex: 1 1 50%;
+}
+
+.console-pane {
+  flex: 1 1 50%;
+  background-color: var(--console-bg);
+}
+
+.pane-header {
+  padding: 0.5rem 1rem;
+  background-color: var(--pane-header-bg);
+  border-bottom: 1px solid var(--surface-border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.console-pane .pane-header {
+  background-color: var(--surface-color); 
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.editor-container {
+  flex: 1;
+  position: relative;
+  background-color: var(--code-bg);
+  transition: background-color 0.3s ease;
+}
+
+#monaco-editor-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.resizer {
+  width: 8px;
+  cursor: col-resize;
+  background-color: transparent;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.resizer::after {
+  content: '';
+  width: 2px;
+  height: 24px;
+  background-color: var(--resizer-color);
+  border-radius: 2px;
+}
+
+.resizer:hover, .resizer:active {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.resizer:hover::after, .resizer:active::after {
+  background-color: var(--accent-color);
+}
+
+.console-container {
+  flex: 1;
+  padding: 1rem;
+  overflow: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--console-text);
+}
+
+.console-line {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+  word-break: break-all;
+}
+
+.console-line:last-child {
+  border-bottom: none;
+}
+
+.console-line.error { color: var(--danger-color); }
+.console-line.warn { color: #fbbf24; }
+.console-line.info { color: var(--accent-color); }
+.console-line .type-string { color: #86efac; }
+.console-line .type-number { color: #fca5a5; }
+.console-line .type-boolean { color: #fcd34d; }
+.console-line .type-function { color: #93c5fd; }
+.console-line .type-object { color: #d8b4fe; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
